@@ -618,7 +618,7 @@ class Scratch3ChanceBlocks {
         const i = this.getDiceIndex(args.DICE);
         let side;
         if (args.SIDE.toString().includes('(')) {
-            side = args.SIDE.split(' ')[1];
+            side = this.runtime.dice[i].strings[parseInt(args.SIDE.split('(')[1].split(')')[0]) - 1];
         } else
             side = this.getSideIndex(i, args.SIDE);
         return (side === this.runtime.dice[i].value);
