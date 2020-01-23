@@ -65,7 +65,7 @@ class Scratch3ChanceBlocks {
             }
         });
 
-        this.runtime.on('NAME_DICE', diceNameAndType => {
+        this.runtime.on('CREATE_DICE', diceNameAndType => {
             const diceName = diceNameAndType[0];
             const diceType = diceNameAndType[1];
             this.addDiceObject(diceName, diceType);
@@ -248,9 +248,8 @@ class Scratch3ChanceBlocks {
                 text: 'set [DICE] to [DISTRIBUTION]',
                 arguments: {
                     DICE: {
-                        type: ArgumentType.STRING,
-                        defaultValue: this.runtime.dice[this.runtime.selectedDice].diceName,
-                        menu: 'diceOptionsMenu'
+                        type: ArgumentType.DICEDROPDOWN,
+                        defaultValue: this.runtime.dice[this.runtime.selectedDice].diceName
                     },
                     DISTRIBUTION: {
                         type: ArgumentType.SLIDER,
@@ -700,13 +699,8 @@ class Scratch3ChanceBlocks {
     // To set the distribution of dice
     setDistribution (args) {
         const diceName = args.DICE.toString();
-        const deleteDice = `Delete "${this.runtime.diceToChange}"`;
         const i = this.getDiceIndex(diceName);
-        if (diceName === deleteDice) {
-            this.runtime.dice.splice(this.getDiceIndex(this.runtime.diceToChange), 1);
-            this.runtime.selectedDice = 2;
-            this.runtime.requestToolboxExtensionsUpdate();
-        } else if (i > -1) {
+        if (i > -1) {
             const splitted = args.DISTRIBUTION.split('|');
             if (this.runtime.dice[i].strings.join('~') !== splitted[1]) {
                 this.resetMarkovDistribution(args);

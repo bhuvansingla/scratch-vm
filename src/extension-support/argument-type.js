@@ -42,7 +42,16 @@ const ArgumentType = {
      * Sliding bars represented by a list of numbers that add up to 100.
      */
     SLIDER: 'slider',
-    MARKOV: 'markov'
+
+    /**
+     * Markov distribuions with sliders
+     */
+    MARKOV: 'markov',
+
+    /**
+     * Dropdown Menu for Dice
+     */
+    DICEDROPDOWN: 'dicedropdown'
 };
 
 module.exports = ArgumentType;

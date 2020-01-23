@@ -302,7 +302,7 @@ class Blocks {
         // Validate event
         if (typeof e !== 'object') return;
         if (typeof e.blockId !== 'string' && typeof e.varId !== 'string' &&
-            typeof e.commentId !== 'string') {
+            typeof e.commentId !== 'string' && !e.dicename) {
             return;
         }
         const stage = this.runtime.getTargetForStage();
@@ -501,6 +501,31 @@ class Blocks {
 
                 this.emitProjectChanged();
             }
+            break;
+        case 'dice_change':
+            var diceName = e.dicename;
+            var diceIndex = this.runtime.dice.findIndex(item => item.diceName === diceName)
+            if(diceIndex !== -1){
+                this.runtime.selectedDice = diceIndex;
+                this.runtime.requestToolboxExtensionsUpdate()
+            }
+            break;
+        case 'dice_delete':
+            var diceName = e.dicename;
+            var diceIndex = this.runtime.dice.findIndex(item => item.diceName === diceName)
+            if(diceIndex !== -1){
+                this.runtime.dice.splice(diceIndex, 1);
+                this.runtime.selectedDice = 2;
+                this.runtime.requestToolboxExtensionsUpdate()
+            }
+            break;
+        case 'dice_create':
+            var diceName = e.dicename;
+            var diceType = e.dicetype;
+            if(this.runtime.dice.findIndex(item => item.diceName === diceName) == -1){
+                this.runtime.emit('CREATE_DICE', [diceName, diceType]);
+            }
+
             break;
         }
     }

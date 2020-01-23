@@ -163,6 +163,7 @@ class VirtualMachine extends EventEmitter {
         this.flyoutBlockListener = this.flyoutBlockListener.bind(this);
         this.monitorBlockListener = this.monitorBlockListener.bind(this);
         this.variableListener = this.variableListener.bind(this);
+        this.diceListener = this.diceListener.bind(this);
     }
 
     /**
@@ -1172,6 +1173,12 @@ class VirtualMachine extends EventEmitter {
         // Filter events by type, since blocks only needs to listen to these
         // var events.
         if (['var_create', 'var_rename', 'var_delete'].indexOf(e.type) !== -1) {
+            this.runtime.getTargetForStage().blocks.blocklyListen(e);
+        }
+    }
+
+    diceListener (e) {
+        if (['dice_delete', 'dice_change', 'dice_create'].indexOf(e.type) !== -1) {
             this.runtime.getTargetForStage().blocks.blocklyListen(e);
         }
     }

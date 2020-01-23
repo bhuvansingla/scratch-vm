@@ -26,6 +26,9 @@ class Variable {
         case Variable.LIST_TYPE:
             this.value = [];
             break;
+        case Variable.DICE_TYPE:
+            this.value = 0;
+            break;
         case Variable.BROADCAST_MESSAGE_TYPE:
             this.value = this.name;
             break;
@@ -56,6 +59,14 @@ class Variable {
      */
     static get LIST_TYPE () {
         return 'list';
+    }
+
+    /**
+     * Type representation for dice variables.
+     * @const {string}
+     */
+    static get DICE_TYPE () {
+        return 'dice';
     }
 
     /**

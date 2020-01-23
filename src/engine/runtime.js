@@ -84,6 +84,10 @@ const ArgumentTypeMap = (() => {
         shadowType: 'markov',
         fieldType: 'MARKOV'
     };
+    map[ArgumentType.DICEDROPDOWN] = {
+        shadowType: 'dicedropdown',
+        fieldType: 'DICEDROPDOWN'
+    };
     return map;
 })();
 
