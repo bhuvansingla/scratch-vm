@@ -765,14 +765,18 @@ class Scratch3ChanceBlocks {
     setDistribution (args) {
         const diceName = args.DICE.toString();
         const i = this.getDiceIndex(diceName);
+        var flag = 0;
         if (i > -1) {
             const splitted = args.DISTRIBUTION.split('|');
             if (this.runtime.dice[i].strings.join('~') !== splitted[1]) {
-                this.startMarkovDistribution(i);
+                flag = 1;
             }
             const distribution = splitted[0];
             this.runtime.dice[i].strings = splitted[1].split('~');
             this.runtime.dice[i].distribution = distribution;
+            if(flag){
+                this.startMarkovDistribution(i);
+            }
             this.runtime.dice[i].markovDistribution['~'] = distribution;
             this.runtime.selectedDice = i;
             this.runtime.requestToolboxExtensionsUpdate();
