@@ -694,11 +694,11 @@ class Scratch3ChanceBlocks {
         }
         switch (this.runtime.dice[this.runtime.selectedDice].diceType) {
             case 'costume':
-                return [markovSliderArray.join('||'), statesString, this.runtime.dice[i].diceType, this.costumeData.join('~')].join('|||');
+                return [markovSliderArray.join('||'), statesString, this.runtime.dice[i].diceType, this.costumeData.join('~'), this.runtime.dice[i].diceName].join('|||');
             case 'sound':
-                return [markovSliderArray.join('||'), statesString, this.runtime.dice[i].diceType, this.soundData.join('~')].join('|||');
+                return [markovSliderArray.join('||'), statesString, this.runtime.dice[i].diceType, this.soundData.join('~'), this.runtime.dice[i].diceName].join('|||');
             default:
-                return [markovSliderArray.join('||'), statesString, this.runtime.dice[i].diceType].join('|||');
+                return [markovSliderArray.join('||'), statesString, this.runtime.dice[i].diceType, '', this.runtime.dice[i].diceName].join('|||');
         }
     }
 
